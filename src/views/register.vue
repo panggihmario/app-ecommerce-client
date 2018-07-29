@@ -6,28 +6,31 @@
                   <v-card>
                     <v-container >
                         <form>
+                            <v-layout row>
+                            <v-flex xs12>
+                              <v-text-field name ="email" label="name" v-model="inputName" type="name">
+                                {{user}}
+                              </v-text-field>
+                            </v-flex>
+                          </v-layout>
                           <v-layout row>
                             <v-flex xs12>
-                              <v-text-field name ="email" label="email" id="email" type="email" v-model="inputEmail">
+                              <v-text-field name ="email" label="email" v-model="inputEmail" type="name" >
                               </v-text-field>
                             </v-flex>
                           </v-layout>
                            <v-layout row>
                             <v-flex xs12>
-                              <v-text-field name ="password" label="password" id="password" v-model="inputPassword" type="password">
+                              <v-text-field  label="password"  v-model="inputPassword" type="password">
                               </v-text-field>
                             </v-flex>
                           </v-layout>
                                 <v-layout row>
-                                  <v-flex xs 6>
+                                <v-flex xs 12>
                                     <div>
-                                   <v-btn round color="primary" dark v-on:click="loginUser">Sign In </v-btn>
+                                   <v-btn round color="primary" dark v-on:click="register">Register</v-btn>
                                 </div>
-                                  </v-flex>
-                                <v-flex xs 6>
-                                    <div>
-                                   <v-btn round color="primary" dark v-on:click="moveToRegister">Register</v-btn>
-                                </div>
+                                
                                   </v-flex>
                                 </v-layout>      
                         </form>
@@ -45,26 +48,30 @@ import {mapActions,mapState} from 'vuex'
 export default {
     data(){
       return {
-
+          
       }
     },
     methods :{
-      moveToRegister(){
-        router.push('/register')
-      },
-      ...mapActions([
-            "login"
-      ]),
-      loginUser(){
-   
-        this.login()
-      }
-
-    },
-      computed :{
-        ...mapState([
-            'email','password'
+        ...mapActions([
+            "adduser"
         ]),
+        register(){
+            // console.log(this.user,this.email)
+            this.adduser()
+        }
+    },
+    computed :{
+        ...mapState([
+            'user','email','password'
+        ]),
+           inputName: {
+                get () {
+                    return this.$store.state.name
+                },
+                set (value) {
+                    this.$store.commit('setName', value)
+                }
+            },
             inputEmail :{
                 get(){
                     return this.$store.state.email
@@ -84,8 +91,6 @@ export default {
     }
 }
 </script>
-
-
 <style lang="scss" scoped>
 
 .v-card {
