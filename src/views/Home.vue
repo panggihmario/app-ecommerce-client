@@ -36,17 +36,18 @@
               </v-flex>
           </v-layout>
       </v-container>
+   
  </v-app>
 </template>
 
 <script>
 import router from '../router'
 import {mapActions,mapState} from 'vuex'
+import modal from '@/components/modal.vue'
 export default {
-    data(){
-      return {
-
-      }
+ 
+    components :{
+        modal
     },
     methods :{
       moveToRegister(){
@@ -59,7 +60,6 @@ export default {
    
         this.login()
       }
-
     },
       computed :{
         ...mapState([
