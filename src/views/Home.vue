@@ -91,7 +91,7 @@ export default {
 .v-card {
     display: block;
     border-radius: 10px;
-
+    margin-top : 190px;
     border: solid 2px;  
     min-width: 0;
     position: relative;

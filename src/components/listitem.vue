@@ -1,21 +1,24 @@
 <template>
 <div>
+  <v-container>
+
     <div id="nav-categories" class="offset-md-2">
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a @click="allItem()" class="nav-link active" href="#">All</a>
+              <a @click="allItem()" class="nav-link active black--text" href="#">All</a>
             </li>
             <li class="nav-item">
-              <a @click="getCategory('book')" class="nav-link" href="#">Book</a>
+              <a @click="getCategory('book')" class="nav-link  black--text" href="#">Book</a>
             </li>
             <li class="nav-item">
-              <a @click="getCategory('toy&hobby')" class="nav-link" href="#">Toy & Hobby</a>
+              <a @click="getCategory('toy&hobby')" class="nav-link  black--text" href="#">Toy & Hobby</a>
             </li>
             <li class="nav-item">
-              <a @click="getCategory('fashion')" class="nav-link" href="#">fashion</a>
+              <a @click="getCategory('fashion')" class="nav-link  black--text" href="#">fashion</a>
             </li>
           </ul>
-</div>
+	</div>
+  </v-container>
 
 
 
@@ -26,23 +29,32 @@
     </v-tabs> -->
      <v-container grid-list-md text-xs-center> 
          <v-layout row wrap>
-        <v-flex  xs3  v-for="(item,index) in allitem" :key=index >
-           <v-card >
-          <v-card-media
-            :src="item.url"
-            height="190px"
-          ></v-card-media>
-          <v-card-title primary-title>
-            <div>
-              <h4 class="headline mb-0">{{item.name}}</h4>
-              <div>{{item.category}}<br>$ :{{item.price}}</div>
-              
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn outline color="indigo" v-on:click="addToCart(item)">Add to Cart</v-btn>
-            
-          </v-card-actions>
+        	<v-flex  xs3  v-for="(item,index) in allitem" :key=index >
+         <v-card >
+				<v-card-media
+					:src="item.url"
+					height="190px"
+				></v-card-media>
+				<v-card-title primary-title>
+					<div>
+					<v-list two-line subheader>
+					<v-subheader inset>
+						<h5> {{item.name}}
+						</h5>
+					</v-subheader>
+					
+					<v-list-tile-content>
+						<v-list-tile-title>{{ item.category }}</v-list-tile-title>
+						<v-list-tile-sub-title> $ {{ item.price }}</v-list-tile-sub-title>
+					</v-list-tile-content>
+					
+					</v-list>
+					</div>
+				</v-card-title>
+				<v-card-actions>
+					<v-btn outline color="indigo" v-on:click="addToCart(item)">Add to Cart</v-btn>
+					
+				</v-card-actions>
         </v-card>
         </v-flex>
           

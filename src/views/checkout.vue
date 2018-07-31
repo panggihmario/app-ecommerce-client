@@ -1,4 +1,6 @@
 <template>
+<body>
+    <Navbar/>
     <div class="container">
 <div class="row">
     <div class="col-sm">
@@ -29,15 +31,20 @@
  
   </div>
   </div>
+</body>
 </template>
 
 <script>
 import {mapActions,mapState} from 'vuex'
+import Navbar from '@/components/navbar.vue'
 export default {
     data(){
         return{
             total : 0
         }
+    },
+      components:{
+        Navbar
     },
     methods : {
         ...mapActions([

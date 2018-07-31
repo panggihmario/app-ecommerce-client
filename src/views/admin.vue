@@ -1,6 +1,9 @@
 <template>
+   <body>
    
-   <v-app id="inspire">
+       <Navbar/>
+       <v-app inspire>
+
       <v-container>
           <v-layout row>
               <v-flex xs12 sm6 offset-sm3>
@@ -49,12 +52,18 @@
               </v-flex>
           </v-layout>
       </v-container>
- </v-app>
+ 
+    </v-app>
+   </body>
 </template>
 
 <script>
 import {mapActions,mapState} from 'vuex'
+import Navbar from '@/components/navbar.vue'
 export default {
+    components:{
+        Navbar
+    },
     methods :{
         ...mapActions([
             "changeImage","upload"

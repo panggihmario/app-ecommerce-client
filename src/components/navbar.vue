@@ -1,8 +1,13 @@
 <template>
     <v-toolbar dark color="orange darken-2">
       <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title class="black--text">Title</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-toolbar-title >
+          <router-link class="black--text" to="/lobby">Lobby</router-link>
+      </v-toolbar-title>
+       <v-toolbar-title class="black--text">
+           <router-link class="black--text" to="/admin">Admin</router-link>
+       </v-toolbar-title>
+      <v-spacer> </v-spacer>
       <v-toolbar-items class="hidden-sm-and-down ">
         <v-btn flat class="black--text">  </v-btn>
 
