@@ -1,4 +1,29 @@
 <template>
+<div>
+    <div id="nav-categories" class="offset-md-2">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a @click="allItem()" class="nav-link active" href="#">All</a>
+            </li>
+            <li class="nav-item">
+              <a @click="getCategory('book')" class="nav-link" href="#">Book</a>
+            </li>
+            <li class="nav-item">
+              <a @click="getCategory('toy&hobby')" class="nav-link" href="#">Toy & Hobby</a>
+            </li>
+            <li class="nav-item">
+              <a @click="getCategory('fashion')" class="nav-link" href="#">fashion</a>
+            </li>
+          </ul>
+</div>
+
+
+
+    <!-- <v-tabs fixed-tabs>
+      <v-tab v-for="(item,index) in allitem" :key=index>
+        {{item.category}}
+      </v-tab>
+    </v-tabs> -->
      <v-container grid-list-md text-xs-center> 
          <v-layout row wrap>
         <v-flex  xs3  v-for="(item,index) in allitem" :key=index >
@@ -25,6 +50,7 @@
        
          </v-layout>
     </v-container>
+</div>
 </template>
 
 <script>
@@ -38,7 +64,7 @@ export default {
   },
     methods:{
            ...mapActions([
-            "allItem","addToCart"
+            "allItem","addToCart","getCategory"
       ]),
     
     // getAllItem(){

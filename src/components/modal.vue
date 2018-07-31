@@ -11,11 +11,20 @@
     <th>Name</th>
     <th>Quantity</th>
     <th>Price</th>
+    <th>Inc</th>
+    <th>Dec</th>
   </tr>
   <tr v-for="(item,index) in cart" :key="index">
     <td> {{item.name}}</td>
     <td>{{item.qty}}</td>
     <td>$ {{item.price}}</td>
+    <td>
+      <button v-on:click="inc(item)">Add</button>
+    </td>
+    <td>
+
+      <button v-on:click="dec(item)">Min</button>
+    </td>
   </tr>
   
 </table>
@@ -25,7 +34,8 @@
           <v-card-actions>
             <v-spacer> Total :$ {{total}}</v-spacer>
             <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
-            <v-btn color="blue darken-1"  flat @click.native="dialog = false">Save</v-btn>
+            <v-btn color="blue darken-1"  flat   v-on:click="checkout(cart)">Checkout</v-btn>
+            <!-- <router-link to="/checkout" v-on:click="checkout(cart)">checkout</router-link> -->
           </v-card-actions>
         </v-card>
         </main>
@@ -51,7 +61,7 @@ export default {
     },
     methods : {
       ...mapActions([
-        "addToCart"
+        "addToCart","inc","dec","checkout"
       ])
     },
     data(){

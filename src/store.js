@@ -12,9 +12,29 @@ export default new Vuex.Store({
       items : [],
       total : 0,
       cart :[],
-      dialog : false
+      dialog : false,
+      url :'',
+      itemname : '',
+      category : '',
+      price : null,
+      checkout :[]
   },
   mutations: {
+    setCheckout(state,payload){
+      state.checkout = payload
+    },
+    setItemname(state,payload){
+      state.itemname = payload
+    },
+    setCategory(state,payload){
+      state.category = payload
+    },
+    setPrice(state,payload){
+      state.price = payload
+    },
+    setUrl(state,payload){
+      state.url = payload
+    },
     setTotal(state,payload){
       state.total += payload
     },
@@ -104,9 +124,76 @@ export default new Vuex.Store({
           price : item.price
         })
       }
+      // console.log(item.name)
+      // localStorage.setItem('nama',item.name)
     },
     openModal({commit}){
       commit('setDialog',true)
+    },
+    inc(context,item){
+      // console.log(item.name)
+      item.qty++
+      this.state.total+=item.price
+    },
+    dec(context,item){
+      item.qty--
+      this.state.total-=item.price
+      if(item.qty<=0){
+        for(let i=0;i<this.state.cart.length;i++){
+              this.state.cart.splice(i,1)
+              break
+        }
+      }
+    },
+    changeImage(context,data){
+      console.log(data.target.files[0])
+      this.state.url = data.target.files[0]
+    },
+    upload(context){
+      let formData = new FormData()
+      formData.append('item',this.state.url)
+      axios.post('http://localhost:3000/upload',formData)
+      .then(result=>{
+          console.log('========',result)
+          console.log('success')
+          axios.post('http://localhost:3000/item/addItem',{
+              name : this.state.itemname,
+              category : this.state.category,
+              price : this.state.price,
+              url : result.data.link
+          })
+          .then(data=>{
+              console.log(data)
+          })
+          .catch(err=>{
+              console.log(err)
+          })
+      })
+      .catch(err=>{
+          console.log(err)
+      })
+    },
+    getCategory(context,category){
+      console.log(category)
+      let self = this
+      axios.get(`http://localhost:3000/item/filter/${category}`)
+      .then(function(data){
+        console.log(data.data)
+        self.state.items = data.data
+      })
+    },
+    checkout(context,data){
+      console.log(data)
+      localStorage.setItem('allChart',JSON.stringify(data))
+      localStorage.setItem('total',this.state.total)
+      router.push('/checkout')
+    },
+    getCheckout(context){
+      var data =localStorage.getItem('allChart')
+      
+      console.log(data)
+      this.state.checkout= JSON.parse(data)
+      
     }
   }
 })
